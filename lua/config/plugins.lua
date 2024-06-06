@@ -77,6 +77,7 @@ return packer.startup(function(use)
         name = "catppuccin"
     }
     use "nvim-treesitter/nvim-treesitter"
+    use "VonHeikemen/lsp-zero.nvim"
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
