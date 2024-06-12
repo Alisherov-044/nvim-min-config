@@ -78,8 +78,11 @@ return packer.startup(function(use)
     }
     use "nvim-treesitter/nvim-treesitter"
     use "VonHeikemen/lsp-zero.nvim"
+    use "windwp/nvim-ts-autotag"
+    use "lewis6991/gitsigns.nvim"
+    use "preservim/nerdcommenter"
 
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
-	end
+    end
 end)

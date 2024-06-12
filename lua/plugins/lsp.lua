@@ -1,6 +1,6 @@
 require("mason").setup()
 require("mason-lspconfig").setup({
-    ensure_installed = { "tsserver", "tailwindcss", "lua_ls", "svelte", "cssls", "somesass_ls", "dockerls", "docker_compose_language_service", "eslint", "graphql", "html", "jsonls", "prismals", "vuels", "rust_analyzer", "markdown_oxide" }
+    ensure_installed = { "clangd", "tsserver", "tailwindcss", "lua_ls", "svelte", "cssls", "somesass_ls", "dockerls", "docker_compose_language_service", "eslint", "graphql", "html", "jsonls", "prismals", "vuels", "rust_analyzer", "markdown_oxide" }
 })
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -20,8 +20,19 @@ require("lsp-zero").on_attach(function(_, bufnr)
     vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
-require("lspconfig").lua_ls.setup {
+require("lspconfig").clangd.setup {
     capabilities = capabilities
+}
+
+require("lspconfig").lua_ls.setup {
+    capabilities = capabilities,
+    settings = {
+        Lua = {
+            diagnostics = {
+                globals = { "vim" }
+            }
+        }
+    }
 }
 require("lspconfig").tsserver.setup {
     capabilities = capabilities
@@ -33,7 +44,19 @@ require("lspconfig").svelte.setup {
     capabilities = capabilities
 }
 require("lspconfig").cssls.setup {
-    capabilities = capabilities
+    capabilities = capabilities,
+    settings = {
+        css = {
+            lint = {
+                unknownAtRules = "ignore"
+            }
+        },
+        scss = {
+            lint = {
+                unknownAtRules = "ignore"
+            }
+        }
+    }
 }
 require("lspconfig").somesass_ls.setup {
     capabilities = capabilities
