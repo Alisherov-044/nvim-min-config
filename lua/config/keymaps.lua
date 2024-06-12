@@ -16,5 +16,6 @@ map("n", "<leader>pv", ":Ex<CR>", {})
 map("n", "<leader>s", ":w<CR>:PrettierAsync<CR>", {})
 map("n", "<leader><leader>", ":", {})
 map("n", "<j>", "<C-d>")
-map("n", "<leader>rep", [[:%s/]])
+map("n", "<leader>rep", '"hy:%s/')
+map("v", "<leader>rep", '"hy:%s/<C-r>h/', { noremap = true, silent = false })
 
